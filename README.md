@@ -506,18 +506,50 @@ The template bots are based on the Bot class defined in the Bot Framework SDK, w
 Conversations in a bot are composed of activities, which represent events such as a user joining a conversation or a message being received. These activities occur within the context of a turn, a two-way exchange between the user and bot. The Bot Framework Service notifies your bot's adapter when an activity occurs in a channel by calling its Process Activity method, and the adapter creates a context for the turn and calls the bot's Turn Handler method to invoke the appropriate logic for the activity.
 QA: 
 
- ## Implement activity handlers and dialogs
+
+https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/13-bot-framework.html 
+
+## Bot application classes and logic
+
+Conversations in a bot are composed of activities, which represent events such as a user joining a conversation or a message being received
+
+These activities occur within the context of a **turn**, a two-way exchange between the user and bot. 
+
+1. **The Bot Framework Service** notifies your bot's adapter when an activity occurs in a channel by calling its **Process Activity** method, 
+2. And the adapter creates a context for the turn and calls the bot's **Turn Handler** method to invoke the appropriate logic for the activity.
+
+## Implement activity handlers and dialogs
 The logic for processing the activity can be implemented in multiple ways. The Bot Framework SDK provides classes that can help you build bots that manage conversations using:
 
 **Activity handlers:** Event methods that you can override to handle different kinds of activities.
 
 **Dialogs:** More complex patterns for handling stateful, multi-turn conversations.
 
+## 1.Activity handlers
+When an activity occurs in a channel, the Bot Framework Service calls the bot adapter's **Process Activity** function, passing the activity details. The adapter creates a **turn context** for the activity and passes it to the bot's turn handler, which calls the individual, event-specific activity handler.
 
-Create a Bot with the Bot Framework SDK
-https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/13-bot-framework.html 
-```bash
+![App Screenshot](https://learn.microsoft.com/en-gb/training/wwl-data-ai/design-bot-conversation-flow/media/activity-handlers.png)
 
-```
+**Turn context**:
+
+An activity occurs within the context of a turn, which represents a single two-way exchange between the user and the bot. Activity handler methods include a parameter for the turn context, which you can use to access relevant information. For example, the activity handler for a message received activity includes the text of the message
+
+## 2.Dialogs
+For more complex conversational flows where you need to store state between turns to enable a multi-turn conversation, you can implement dialogs.
+
+1. Component dialogs
+2. Adaptive dialogs
+
+## Component dialogs
+
+A component dialog is a dialog that can contain other dialogs, defined in its dialog set. Often, the initial dialog in the component dialog is a **waterfall dialog**, which defines a sequential series of steps to guide the conversation.
+
+![App Screenshot](https://learn.microsoft.com/en-gb/training/wwl-data-ai/design-bot-conversation-flow/media/component-dialog.png)
+
+## Adaptive dialogs
+An adaptive dialog is another kind of container dialog in which the flow is more flexible, allowing for **interruptions, cancellations, and context switches** at any point in the conversation. In this style of conversation, the bot initiates a root dialog, which contains a flow of actions (which can include branches and loops), and triggers that can be initiated by actions or by a recognizer
+
+
+![App Screenshot](https://learn.microsoft.com/en-gb/training/wwl-data-ai/design-bot-conversation-flow/media/adaptive-dialog.png)
 
 
