@@ -28,23 +28,23 @@
        
 ## Pre-configured features
 
-* Summarization - A summarization query will be sent to an endpoint similar to the following, with the task specified as extractiveSummarizationTasks or ConversationalSummarizationTask
+* Summarization - A summarization query will be sent to an endpoint similar to the following, with the task specified as **extractiveSummarizationTasks** or **ConversationalSummarizationTask**
 
-* Named entity recognition - An entity recognition query will be sent to an endpoint similar to the following, with the task specified as EntityRecognition
+* Named entity recognition - An entity recognition query will be sent to an endpoint similar to the following, with the task specified as **EntityRecognition**
 
-* Personally identifiable information (PII) detection - A PII query will be sent to an endpoint similar to the following, with the task specified as PiiEntityRecognition.
+* Personally identifiable information (PII) detection - A PII query will be sent to an endpoint similar to the following, with the task specified as **PiiEntityRecognition.**
 
-* Key phrase extraction - KeyPhraseExtraction
+* Key phrase extraction - **KeyPhraseExtraction**
 
-* Sentiment analysis - SentimentAnalysis
+* Sentiment analysis - **SentimentAnalysis**
 
-* Language detection - LanguageDetection
+* Language detection - **LanguageDetection**
 
 * Conversational language understanding (CLU)
 
 CLU is one of the core custom features offered by Azure Cognitive Services for Language. CLU helps users to build custom natural language understanding models to predict overall intent and extract important information from incoming utterances. CLU does require data to be tagged by the user to teach it how to predict intents and entities accurately.
 
-A language detection query will be sent to an endpoint similar to the following, with the task specified as Conversation. These custom features require extra parameters in the JSON body, including the projectName and deploymentName of your model.
+A language detection query will be sent to an endpoint similar to the following, with the task specified as **Conversation**. These custom features require extra parameters in the JSON body, including the projectName and deploymentName of your model.
 
 Language Studio - Preview portal at https://language.cognitive.azure.com. 
 
@@ -280,8 +280,8 @@ https://learn.microsoft.com/en-us/training/modules/build-qna-solution-qna-maker/
 ## Classification
 
 ```bash
-Single label classification (json request with customClassificationTasks) - you can assign only one class to each file. Following the above example, a video game summary could only be classified as "Adventure" or "Strategy".
-Multiple label classification (json request with customMultiClassificationTasks) - you can assign multiple classes to each file. This type of project would allow you to classify a video game summary as "Adventure" or "Adventure and Strategy".
+Single label classification (json request with **customClassificationTasks**) - you can assign only one class to each file. Following the above example, a video game summary could only be classified as "Adventure" or "Strategy".
+Multiple label classification (json request with **customMultiClassificationTasks**) - you can assign multiple classes to each file. This type of project would allow you to classify a video game summary as "Adventure" or "Adventure and Strategy".
 ```
     
 ## Screenshots
@@ -291,11 +291,11 @@ Multiple label classification (json request with customMultiClassificationTasks)
 
 ## Model Evaluation
 
-Recall - Of all the actual labels, how many were identified; the ratio of true positives to all that was labeled.
+**Recall** - Of all the actual labels, how many were identified; the ratio of true positives to all that was labeled.
 
-Precision - How many of the predicted labels are correct; the ratio of true positives to all identified positives.
+**Precision** - How many of the predicted labels are correct; the ratio of true positives to all identified positives.
 
-F1 Score - A function of recall and precision, intended to provide a single score to maximize for a balance of each component
+**F1 Score** - A function of recall and precision, intended to provide a single score to maximize for a balance of each component
 
 
 ## REST API 
@@ -340,7 +340,7 @@ Header:
 ```
 
 Response: (202)
-Look for response header with key: operation-location - https://premaztextclassify.cognitiveservices.azure.com/text/analytics/v3.2-preview.2/analyze/jobs/ee45db01-9g89-4de8-bbac-3281c6971c1f
+Look for response header with key: **operation-location** - https://premaztextclassify.cognitiveservices.azure.com/text/analytics/v3.2-preview.2/analyze/jobs/ee45db01-9g89-4de8-bbac-3281c6971c1f
 
 2. Get the classification results:
 
@@ -418,7 +418,7 @@ Distribution - use the appropriate distribution of document types. A more divers
 Accuracy - use data that is as close to real world data as possible. Fake data works to start the training process, but it likely will differ from real data in ways that can cause your model to not extract correctly.
 
 ## How to extract entities
-To submit an extraction task, the API requires the JSON body to specify which task to execute. For custom NER, the task for the JSON payload is customEntityRecognitionTasks.
+To submit an extraction task, the API requires the JSON body to specify which task to execute. For custom NER, the task for the JSON payload is **customEntityRecognitionTasks**.
 
 ```bash
 {
@@ -451,11 +451,11 @@ To submit an extraction task, the API requires the JSON body to specify which ta
 
 ## Model Evaluation
 
-Precision : The ratio of successful entity recognitions to all attempted recognitions. A high score means that as long as the entity is recognized, it's labeled correctly.
+**Precision** : The ratio of successful entity recognitions to all attempted recognitions. A high score means that as long as the entity is recognized, it's labeled correctly.
 
-Recall : The ratio of successful entity recognitions to the actual number of entities in the document. A high score means it finds the entity or entities well, regardless of if it assigns them the right label
+**Recall** : The ratio of successful entity recognitions to the actual number of entities in the document. A high score means it finds the entity or entities well, regardless of if it assigns them the right label
 
-F1 score: Combination of precision and recall providing a single scoring metric
+**F1 score**: Combination of precision and recall providing a single scoring metric
 
 
 ## How to interpret metrics
@@ -471,8 +471,53 @@ If precision is high but recall is low, it means that the model doesn't always r
 4. Implement knowledge mining solutions 	(5–10%)
 
        https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/ 
-
+######################################################################################## 
 
 5. Implement conversational AI solutions 	(15–20%)	
 
        https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/ 
+       
+       
+
+**Create conversational AI solutions** 
+
+https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/ 
+
+## Get started with the Bot Framework SDK
+
+
+**Azure Bot Service** - A cloud service that enables bot delivery through one or more channels, and integration with other services.
+
+**Bot Framework Service** - A component of Azure Bot Service that provides a REST API for handling bot activities.
+
+**Bot Framework SDK** - A set of tools and libraries for end-to-end bot development that abstracts the REST interface, enabling bot development in a range of programming languages.
+
+## Developing a Bot with the Bot Framework SDK
+
+**Empty Bot** - a basic bot skeleton.
+
+**Echo Bot** - a simple "hello world" sample in which the bot responds to messages by echoing the message text back to the user.
+
+**Core Bot** - a more comprehensive bot that includes common bot functionality, such as integration with the Language Understanding service.
+
+Bot application classes and logic
+The template bots are based on the Bot class defined in the Bot Framework SDK, which is used to implement the logic in your bot that receives and interprets user input, and responds appropriately. Additionally, bots make use of an Adapter class that handles communication with the user's channel.
+
+Conversations in a bot are composed of activities, which represent events such as a user joining a conversation or a message being received. These activities occur within the context of a turn, a two-way exchange between the user and bot. The Bot Framework Service notifies your bot's adapter when an activity occurs in a channel by calling its Process Activity method, and the adapter creates a context for the turn and calls the bot's Turn Handler method to invoke the appropriate logic for the activity.
+QA: 
+
+ ## Implement activity handlers and dialogs
+The logic for processing the activity can be implemented in multiple ways. The Bot Framework SDK provides classes that can help you build bots that manage conversations using:
+
+**Activity handlers:** Event methods that you can override to handle different kinds of activities.
+
+**Dialogs:** More complex patterns for handling stateful, multi-turn conversations.
+
+
+Create a Bot with the Bot Framework SDK
+https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/13-bot-framework.html 
+```bash
+
+```
+
+
