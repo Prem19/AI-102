@@ -552,4 +552,36 @@ An adaptive dialog is another kind of container dialog in which the flow is more
 
 ![App Screenshot](https://learn.microsoft.com/en-gb/training/wwl-data-ai/design-bot-conversation-flow/media/adaptive-dialog.png)
 
+**------------------------------------------------------------------------------------------------------------------**
 
+
+# Understand ways to build a bot
+
+1. Power Virtual Agents
+2. Bot Framework Composer
+3. Bot Framework SDK
+
+## PVA
+
+Enables users to build a chatbot without requiring any code. PVA lets users use an interface to build conversations, send messages, publish, monitor, and configure your bot all within the PVA app.
+
+
+## Bot Framework Composer
+
+Bot Framework Composer is an app for developers to build, test, and publish your bot via an interactive interface. Composer is built on the Bot Framework SDK, and supports extending your bot with code for more complex interactions.
+
+## Bot Framework SDK
+
+The Bot Framework SDK is a collection of libraries and tools to build, test, publish, and manage conversational bots. The SDK can connect to other AI services, covers end-to-end bot development, and offers the most authoring flexibility.
+
+## Implementing dialogs with the Bot Framework Composer
+
+One or more actions that define the flow of message activities in the dialog. These include sending a message, prompting the user for input, asking a question, and branching the conversation.
+
+
+A **Trigger**, which invokes the dialog logic for certain conditions or based on intent detected.
+
+A **recognizer**, which interprets user input to determine semantic intent. Recognizers are based on the Language Understanding service by default, but you can also use other types of recognizer; such as the QnA Service or simple regular expression matches.
+
+
+In addition to these elements, a dialog has memory in which values are stored as properties. **Properties** can be defined at various scopes, including the user scope (variables that store information for the lifetime of the user session with the bot, such as user.greeted) and dialog scope (variables that persist for the lifetime of the dialog, such as dialog.response).
