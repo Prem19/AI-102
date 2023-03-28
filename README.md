@@ -471,6 +471,139 @@ If precision is high but recall is low, it means that the model doesn't always r
 4. Implement knowledge mining solutions 	(5–10%)
 
        https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/ 
+       
+       
+       
+# Implement knowledge mining with Azure Cognitive Search
+
+
+## Cognitive Search Solution:
+
+Indexing and querying wide range of data sources. 
+
+## **Skillset**
+
+In Azure Cognitive Search, you can apply artificial intelligence (AI) skills as part of the indexing process to enrich the source data with new information, which can be mapped to index fields. 
+
+The skills used by an indexer are encapsulated in a skillset that defines an enrichment pipeline in which each step enhances the source data with insights obtained by a specific AI skill.
+
+## **Indexer**
+
+The indexer is the engine that drives the overall indexing process. It takes the **outputs extracted using the skills in the skillset, along with the data and metadata values extracted from the original data source, and maps them to fields in the index**.
+
+## **Index**
+
+The index is the searchable result of the indexing process. It consists of a collection of JSON documents, with fields that contain the values extracted during indexing. 
+
+## Apply filtering and sorting
+https://learn.microsoft.com/en-us/training/modules/create-azure-cognitive-search-solution/6-apply-filtering-sorting
+
+By including filter criteria in a simple search expression.
+
+By providing an OData filter expression as a $filter parameter with a full syntax search expression.
+
+```
+search=London
+$filter=author eq 'Reviewer'
+queryType=Full
+```
+
+## Filtering with facets
+
+Facets are a useful way to present users with filtering criteria based on field values in a result set. They work best when a field has a small number of discrete values that can be displayed as links or options in the user interface.
+
+```
+search=*
+facet=author
+```
+
+## Enhance the index
+
+1. Search-as-you-type (**DocumentsOperationsExtensions.Suggest and DocumentsOperationsExtensions.Autocomplete**)
+
+2. Custom scoring and result boosting
+ 
+  By default, search results are sorted by a relevance score that is calculated based on a term-frequency/inverse-document-frequency (TF/IDF) algorithm.
+
+  You can **customize the way this score is calculated by defining a scoring profile that applies a weighting value to specific fields** - essentially increasing the search score for documents when the search term is found in those fields
+
+**------------------------------------------------------------------------------------------------------------------**
+
+## Create a custom skill for Azure Cognitive Search
+
+You can use the predefined skills in Azure Cognitive Search to greatly enrich an index by extracting additional information from the source data. However, there may be occasions when you have specific data extraction needs that cannot be met with the predefined skills and require some custom functionality.
+
+To support these scenarios, you can implement **custom skills as web-hosted services (such as Azure Functions)**
+ that support the required interface for integration into a skillset.
+ https://learn.microsoft.com/en-us/training/modules/create-enrichment-pipeline-azure-cognitive-search/9-create-custom-skill 
+
+  Input Schema
+
+```
+{
+    "values": [
+      {
+        "recordId": "<unique_identifier>",
+        "data":
+           {
+             "<input1_name>":  "<input1_value>",
+             "<input2_name>": "<input2_value>",
+             ...
+           }
+      },
+      {
+        "recordId": "<unique_identifier>",
+        "data":
+           {
+             "<input1_name>":  "<input1_value>",
+             "<input2_name>": "<input2_value>",
+             ...
+           }
+      },
+      ...
+    ]
+}
+```
+
+Output Schema
+
+```
+{
+    "values": [
+      {
+        "recordId": "<unique_identifier_from_input>",
+        "data":
+           {
+             "<output1_name>":  "<output1_value>",
+              ...
+           },
+         "errors": [...],
+         "warnings": [...]
+      },
+      {
+        "recordId": "< unique_identifier_from_input>",
+        "data":
+           {
+             "<output1_name>":  "<output1_value>",
+              ...
+           },
+         "errors": [...],
+         "warnings": [...]
+      },
+      ...
+    ]
+}
+```
+
+
+## Add a custom skill to a skillset
+
+To integrate a custom skill into your indexing solution, you must add a skill for it to a skillset using the **Custom.WebApiSkill** skill type.
+
+ **"@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",**
+
+       
+       
 ######################################################################################## 
 
 5. Implement conversational AI solutions 	(15–20%)	
