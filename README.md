@@ -466,15 +466,12 @@ If precision is low but recall is high, it means that the model recognizes the e
 If precision is high but recall is low, it means that the model doesn't always recognize the entity, but when the model extracts the entity, the correct label is applied.
 
 ########################################################################################     
-       
+      
+  
+# 4. Implement knowledge mining with Azure Cognitive Search(5–10%)
 
-4. Implement knowledge mining solutions 	(5–10%)
-
-       https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/ 
+ https://learn.microsoft.com/en-us/training/paths/implement-knowledge-mining-azure-cognitive-search/     
        
-       
-       
-# Implement knowledge mining with Azure Cognitive Search(5–10%)
 
 ## Implement a Cognitive Search solution
 -> Provision a Cognitive Search resource
@@ -680,15 +677,47 @@ Azure Cognitive Search lets you query an index using a REST endpoint or inside t
        
 ######################################################################################## 
 
-5. Implement conversational AI solutions 	(15–20%)	
-
-       https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/ 
-       
-       
-
-**Create conversational AI solutions** 
+# 5.  Implement conversational AI solutions 	(15–20%)	
 
 https://learn.microsoft.com/en-us/training/paths/create-conversational-ai-solutions/ 
+       
+
+## Design and implement conversation flow
+-> Design conversational logic for a bot
+
+-> Choose appropriate activity handlers, dialogs or topics, triggers, and state handling for a bot
+
+## Build a conversational bot
+
+-> Create a bot from a template
+
+-> Create a bot from scratch
+
+-> Implement activity handlers, dialogs or topics, and triggers
+
+-> Implement channel-specific logic
+
+-> Implement Adaptive Cards
+
+-> Implement multi-language support in a bot
+
+-> Implement multi-step conversations
+
+-> Manage state for a bot
+
+-> Integrate Cognitive Services into a bot, including question answering, LUIS, and Speech service
+
+## Test, publish, and maintain a conversational bot
+
+-> Test a bot using the Bot Framework Emulator or the Power Virtual Agents web app
+
+-> Test a bot in a channel-specific environment
+
+-> Troubleshoot a conversational bot
+
+-> Deploy bot logic       
+
+**Create conversational AI solutions** 
 
 ## Get started with the Bot Framework SDK
 
