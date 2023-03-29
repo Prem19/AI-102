@@ -63,7 +63,7 @@ Monitor an Azure AI resource
 | Data and compute management | Cloud-based data storage and compute resources that professional data scientists can use to run data experiment code at scale. 
 | Pipelines	 | Data scientists, software engineers, and IT operations professionals can define pipelines to orchestrate model training, deployment, and management tasks.
 
-## capabilities of Azure Cognitive Services
+## Capabilities of Azure Cognitive Services
 
 **Language**
 1. Text analysis	
@@ -217,6 +217,86 @@ Enables you to monitor and detect abnormalities in your time series data without
 The Multivariate Anomaly Detection APIs further enable developers by easily integrating advanced AI for detecting anomalies from groups of metrics, without the need for machine learning knowledge or labeled data. Dependencies and inter-correlations between up to 300 different signals are now automatically counted as key factors.
 
 
+# Anomaly detection modes
+
+https://learn.microsoft.com/en-us/azure/cognitive-services/anomaly-detector/quickstarts/client-libraries?tabs=command-line&pivots=rest-api 
+
+
+The following request URLs must be combined with the appropriate endpoint for your subscription. For example: 
+
+https://<your-custom-subdomain>.api.cognitive.microsoft.com/anomalydetector/v1.0/timeseries/entire/detect
+
+1. Batch detection
+
+To detect anomalies throughout a batch of data points over a given time range, use the following request URI with your time series data:
+
+/timeseries/entire/detect.
+
+2. Streaming detection
+
+To continuously detect anomalies on streaming data, use the following request URI with your latest data point:
+
+/timeseries/last/detect.
+
+By sending new data points as you generate them, you can monitor your data in real time. A model will be generated with the data points you send, and the API will determine if the latest point in the time series is an anomaly.
+ 
+ **------------------------------------------------------------------------------------------------------------------**
+# Azure Content Moderator?
+
+Azure Content Moderator is an AI service that lets you handle content that is potentially offensive, risky, or otherwise undesirable. It includes the AI-powered content moderation service which scans text, image, and videos and applies content flags automatically.
+
+![App Screenshot](
+https://learn.microsoft.com/en-us/azure/cognitive-services/content-moderator/images/content-moderator-mod-api.png)
+
+
+https://learn.microsoft.com/en-us/azure/cognitive-services/content-moderator/client-libraries?tabs=visual-studio&pivots=programming-language-rest-api
+ 
+ 
+ **------------------------------------------------------------------------------------------------------------------**
+
+# Personalizer?
+
+https://learn.microsoft.com/en-us/azure/cognitive-services/personalizer/what-is-personalizer 
+
+Azure Personalizer is an AI service that your applications make smarter decisions at scale using reinforcement learning. Personalizer processes information about the state of your application, scenario, and/or users (contexts), and a set of possible decisions and related attributes (actions) to determine the best decision to make.
+
+Personalizer can determine the best actions to take in a variety of scenarios:
+
+- E-commerce: What product should be shown to customers to maximize the likelihood of a purchase?
+- Content recommendation: What article should be shown to increase the click-through rate?
+- Content design: Where should an advertisement be placed to optimize user engagement on a website?
+- Communication: When and how should a notification be sent to maximize the chance of a response?
+
+
+https://learn.microsoft.com/en-us/azure/cognitive-services/personalizer/quickstart-personalizer-sdk?pivots=programming-language-python 
+
+## REST API reference 
+https://learn.microsoft.com/en-us/rest/api/personalizer/
+ 
+ **------------------------------------------------------------------------------------------------------------------**
+
+## Azure Metrics Advisor?
+https://learn.microsoft.com/en-us/azure/applied-ai-services/metrics-advisor/overview
+
+Metrics Advisor is a part of Azure Applied AI Services that uses AI to perform data monitoring and anomaly detection in time series data. The service automates the process of applying models to your data, and provides a set of APIs and a web-based workspace for data ingestion, anomaly detection, and diagnostics - without needing to know machine learning.
+
+Use Metrics Advisor to:
+
+- Analyze multi-dimensional data from multiple data sources
+- Identify and correlate anomalies
+- Configure and fine-tune the anomaly detection model used on your data
+- Diagnose anomalies and help with root cause analysis
+
+![App Screenshot](https://learn.microsoft.com/en-us/azure/applied-ai-services/metrics-advisor/media/metrics-advisor-overview.png)
+ **------------------------------------------------------------------------------------------------------------------**
+ 
+## Azure Immersive Reader?
+
+https://learn.microsoft.com/en-us/azure/applied-ai-services/immersive-reader/overview 
+
+Immersive Reader is part of Azure Applied AI Services, and is an inclusively designed tool that implements proven techniques to improve reading comprehension for new readers, language learners, and people with learning differences such as dyslexia.
+
+ 
 ######################################################################################## 
 
 # 2. Implement image and video processing solutions 	(15–20%)	
