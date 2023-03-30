@@ -672,36 +672,7 @@ print('Thumbnail saved in.', thumbnail_file_name)
  
  ```
  
- ## Object Detection
  
- ``` bash
- POST
- https://azrajcog.cognitiveservices.azure.com/vision/v3.1/detect
- 
- {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
-
- Response:
- {
-    "objects": [
-        {
-            "rectangle": {
-                "x": 108,
-                "y": 25,
-                "w": 798,
-                "h": 743
-            },
-            "object": "person",
-            "confidence": 0.782
-        }
-    ],
-    "requestId": "bf88cbd6-2273-4bc0-8e17-063b650c4d3a",
-    "metadata": {
-        "height": 768,
-        "width": 1024,
-        "format": "Jpeg"
-    }
-}
- ```
  ## Tag
  
  ``` bash
@@ -818,6 +789,37 @@ A prediction resource, used by client applications to get predictions from your 
 
 1. **A Cognitive Services resource.**
 2. **A Custom Vision (Prediction) resource.**
+ 
+ ## Object Detection
+ 
+ ``` bash
+ POST
+ https://azrajcog.cognitiveservices.azure.com/vision/v3.1/detect
+ 
+ {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+
+ Response:
+ {
+    "objects": [
+        {
+            "rectangle": {
+                "x": 108,
+                "y": 25,
+                "w": 798,
+                "h": 743
+            },
+            "object": "person",
+            "confidence": 0.782
+        }
+    ],
+    "requestId": "bf88cbd6-2273-4bc0-8e17-063b650c4d3a",
+    "metadata": {
+        "height": 768,
+        "width": 1024,
+        "format": "Jpeg"
+    }
+}
+ ```
 
  **------------------------------------------------------------------------------------------------------------------**
 ## Identify options for face detection analysis and identification
