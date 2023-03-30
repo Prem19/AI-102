@@ -301,9 +301,314 @@ Immersive Reader is part of Azure Applied AI Services, and is an inclusively des
 
 # 2. Implement image and video processing solutions 	(15–20%)	
 
-       https://learn.microsoft.com/en-us/training/paths/create-computer-vision-solutions-azure-cognitive-services/
+https://learn.microsoft.com/en-us/training/paths/create-computer-vision-solutions-azure-cognitive-services/
 
-       https://learn.microsoft.com/en-us/training/paths/extract-text-from-images-documents/ 
+https://learn.microsoft.com/en-us/training/paths/extract-text-from-images-documents/ 
+       
+## Analyze images
+
+-> Select appropriate visual features to meet image processing requirements
+
+-> Create an image processing request to include appropriate image analysis features
+
+-> Interpret image processing responses
+
+## Extract text from images
+
+-> Extract text from images or PDFs by using the Computer Vision service
+
+-> Convert handwritten text by using the Computer Vision service
+
+-> Extract information using prebuilt models in Azure Form Recognizer
+
+-> Build and optimize a custom model for Form Recognizer
+
+## Implement image classification and object detection by using the Custom Vision service, part of Azure Cognitive Services
+
+-> Choose between image classification and object detection models
+
+-> Specify model configuration options, including category, version, and compact
+
+-> Label images
+
+-> Train custom image models, including classifiers and detectors
+
+-> Manage training iterations
+
+-> Evaluate model metrics
+
+-> Publish a trained iteration of a model
+
+-> Export a model to run on a specific target
+
+-> Implement a Custom Vision model as a Docker container
+
+-> Interpret model responses
+
+## Process videos
+-> Process a video by using Azure Video Indexer
+
+-> Extract insights from a video or live stream by using Azure Video Indexer
+
+-> Implement content moderation by using Azure Video Indexer
+
+-> Integrate a custom language model into Azure Video Indexer
+
+
+# Computer Vision resource
+
+- Description and tag generation - determining an appropriate caption for an image, and identifying relevant "tags" that can be used as keywords to indicate its subject.
+- Object detection - detecting the presence and location of specific objects within the image.
+- Face detection - detecting the presence, location, and features of human faces in the image.
+- Image metadata, color, and type analysis - determining the format and size of an image, its dominant color palette, and whether it contains clip art.
+- Category identification - identifying an appropriate categorization for the image, and if it contains any known landmarks.
+- Brand detection - detecting the presence of any known brands or logos.
+- Moderation rating - determine if the image includes any adult or violent content.
+- Optical character recognition - reading text in the image.
+- Smart thumbnail generation - identifying the main region of interest in the image to create a smaller "thumbnail" version.
+
+```bash
+{
+  "categories": [
+   {
+     "name": "_outdoor_mountain",
+     "confidence": "0.9"}
+  ],
+  "adult": {"isAdultContent": "false", …},
+  "tags": [
+    {"name": "outdoor", "confidence": 0.9},
+    {"name": "mountain", " confidence ": 0.9}],
+  "description": {
+    "tags":["outdoor", "mountain"],
+    "captions": [
+      {"name": "A mountain with snow",
+       "confidence": 0.9
+      }
+    ]
+  },
+  "metadata":
+    {"width":60,"height":30, format:"Jpeg"},
+  "faces": [],
+  "brands": [],
+  "color": {"dominantColorForeground": "Brown",…},
+  "imageType": {"clipArtType": 0, …},
+  "objects" : [
+    {
+     "rectangle": {x:20, y:25, w:10, h:20},
+     "object": "mountain",
+     "confidence": 0.9
+    }
+  ]
+}
+```
+
+```
+# Authenticate Computer Vision client
+credential = CognitiveServicesCredentials(cog_key) 
+cv_client = ComputerVisionClient(cog_endpoint, credential)
+
+```
+```
+var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
+```
+
+```
+# Get image analysis
+with open(image_file, mode="rb") as image_data:
+    analysis = cv_client.analyze_image_in_stream(image_data , features)
+
+# Get image description
+for caption in analysis.description.captions:
+    print("Description: '{}' (confidence: {:.2f}%)".format(caption.text, caption.confidence * 100))
+
+# Get image analysis
+with open(image_file, mode="rb") as image_data:
+    analysis = cv_client.analyze_image_in_stream(image_data , features)
+
+# Get image description
+for caption in analysis.description.captions:
+    print("Description: '{}' (confidence: {:.2f}%)".format(caption.text, caption.confidence * 100))
+
+# Get image categories
+if (len(analysis.categories) > 0):
+    print("Categories:")
+    landmarks = []
+    for category in analysis.categories:
+        # Print the category
+        print(" -'{}' (confidence: {:.2f}%)".format(category.name, category.score * 100))
+        if category.detail:
+            # Get landmarks in this category
+            if category.detail.landmarks:
+                for landmark in category.detail.landmarks:
+                    if landmark not in landmarks:
+                        landmarks.append(landmark)
+
+    # If there were landmarks, list them
+    if len(landmarks) > 0:
+        print("Landmarks:")
+        for landmark in landmarks:
+            print(" -'{}' (confidence: {:.2f}%)".format(landmark.name, landmark.confidence * 100))
+
+
+# Get brands in the image
+if (len(analysis.brands) > 0):
+    print("Brands: ")
+    for brand in analysis.brands:
+        print(" -'{}' (confidence: {:.2f}%)".format(brand.name, brand.confidence * 100))
+
+# Get objects in the image
+if len(analysis.objects) > 0:
+    print("Objects in image:")
+
+    # Prepare image for drawing
+    fig = plt.figure(figsize=(8, 8))
+    plt.axis('off')
+    image = Image.open(image_file)
+    draw = ImageDraw.Draw(image)
+    color = 'cyan'
+    for detected_object in analysis.objects:
+        # Print object name
+        print(" -{} (confidence: {:.2f}%)".format(detected_object.object_property, detected_object.confidence * 100))
+        
+        # Draw object bounding box
+        r = detected_object.rectangle
+        bounding_box = ((r.x, r.y), (r.x + r.w, r.y + r.h))
+        draw.rectangle(bounding_box, outline=color, width=3)
+        plt.annotate(detected_object.object_property,(r.x, r.y), backgroundcolor=color)
+    # Save annotated image
+    plt.imshow(image)
+    outputfile = 'objects.jpg'
+    fig.savefig(outputfile)
+    print('  Results saved in', outputfile)
+
+# Get moderation ratings
+ratings = 'Ratings:\n -Adult: {}\n -Racy: {}\n -Gore: {}'.format(analysis.adult.is_adult_content,
+                                                                    analysis.adult.is_racy_content,
+                                                                    analysis.adult.is_gory_content)
+print(ratings)
+
+
+# Generate a thumbnail
+with open(image_file, mode="rb") as image_data:
+    # Get thumbnail data
+    thumbnail_stream = cv_client.generate_thumbnail_in_stream(100, 100, image_data, True)
+
+# Save thumbnail image
+thumbnail_file_name = 'thumbnail.png'
+with open(thumbnail_file_name, "wb") as thumbnail_file:
+    for chunk in thumbnail_stream:
+        thumbnail_file.write(chunk)
+
+print('Thumbnail saved in.', thumbnail_file_name)
+```
+ **------------------------------------------------------------------------------------------------------------------**
+
+## Analyze video
+
+## Video Analyzer for Media capabilities
+
+- Facial recognition - detecting the presence of individual people in the image. This requires Limited Access approval.
+- Optical character recognition - reading text in the video.
+- Speech transcription - creating a text transcript of spoken dialog in the video.
+- Topics - identification of key topics discussed in the video.
+- Sentiment - analysis of how positive or negative segments within the video are.
+- Labels - label tags that identify key objects or themes throughout the video.
+- Content moderation - detection of adult or violent themes in the video.
+- Scene segmentation - a breakdown of the video into its constituent scenes.
+
+https://api.videoindexer.ai.your_endpoint/Videos
+
+```bash
+{
+  "results": [
+    {
+      "accountId":  "1234abcd-9876fghi-0156kihb-00123",
+      "id":  "a12345bc6",
+      "name":  "Responsible AI",
+      "description":  "Microsoft Responsible AI video",
+      "created":  "2021-01-05T15:33:58.918+00:00",
+      "lastModified":  "2021-01-05T15:50:03.123+00:00",
+      "lastIndexed":  "2021-01-05T15:34:08.007+00:00",
+      "processingProgress":  "100%",
+      "durationInSeconds":  114,
+      "sourceLanguage":  "en-US",
+    }
+  ],
+}
+```
+ **------------------------------------------------------------------------------------------------------------------**
+ 
+## Classify Images
+
+The Custom Vision service enables you to build your own computer vision models for image classification or object detection.
+
+To use the Custom Vision service, you must provision two kinds of Azure resource:
+
+A training resource (used to train your models). This can be:
+1. **A Cognitive Services resource.**
+2. **A Custom Vision (Training) resource.**
+
+
+A prediction resource, used by client applications to get predictions from your model. This can be:
+1. **A Cognitive Services resource.**
+2. **A Custom Vision (Prediction) resource.**
+
+ **------------------------------------------------------------------------------------------------------------------**
+  
+## Detect objects in images
+
+Object detection is used to locate and identify objects in images. You can use Custom Vision to train a model to detect specific classes of object in images.
+
+Object detection is a form of computer vision in which a model is trained to detect the presence and location of one or more classes of object in an image. 
+
+Use the Custom Vision service for object detection
+You can use the Custom Vision cognitive service to train an object detection model. To use the Custom Vision service, you must provision two kinds of Azure resource:
+
+A training resource (used to train your models). This can be:
+1. **A Cognitive Services resource.**
+2. **A Custom Vision (Training) resource.**
+
+A prediction resource, used by client applications to get predictions from your model. This can be:
+
+1. **A Cognitive Services resource.**
+2. **A Custom Vision (Prediction) resource.**
+
+ **------------------------------------------------------------------------------------------------------------------**
+## Identify options for face detection analysis and identification
+
+![App Screenshot](https://learn.microsoft.com/en-us/training/wwl-data-ai/detect-analyze-recognize-faces/media/face-options.png)
+
+
+## The Computer Vision service
+The Computer Vision service enables you to detect human faces in an image, as well as returning a bounding box for its location.
+
+## The Face service
+The Face service offers more comprehensive facial analysis capabilities than the Computer Vision service, including:
+
+- Face detection (with bounding box).
+- Comprehensive facial feature analysis (including head pose, presence of spectacles, blur, facial landmarks, occlusion and others).
+- Face comparison and verification.
+- Facial recognition.
+
+## face service
+
+![App Screesnhot](https://learn.microsoft.com/en-us/training/wwl-data-ai/detect-analyze-recognize-faces/media/face-service.png)
+
+- Face detection - for each detected face, the results include an ID that identifies the face and the bounding box coordinates indicating its location in the image.
+- Face attribute analysis - you can return a wide range of facial attributes, including:
+    - Head pose (pitch, roll, and yaw orientation in 3D space)
+    - Glasses (NoGlasses, ReadingGlasses, Sunglasses, or Swimming Goggles)
+    - Blur (low, medium, or high)
+    - Exposure (underExposure, goodExposure, or overExposure)
+    - Noise (visual noise in the image)
+    - Occlusion (objects obscuring the face)
+- Facial landmark location - coordinates for key landmarks in relation to facial features (for example, eye corners, pupils, tip of nose, and so on)
+- Face comparison - you can compare faces across multiple images for similarity (to find individuals with similar facial features) and verification (to determine that a face in one image is the same person as a face in another image)
+- Facial recognition - you can train a model with a collection of faces belonging to specific individuals, and use the model to identify those people in new images.
+
+ **------------------------------------------------------------------------------------------------------------------**
+
+
 
 ######################################################################################## 
 
