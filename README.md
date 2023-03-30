@@ -854,8 +854,388 @@ The Face service offers more comprehensive facial analysis capabilities than the
 - Face comparison - you can compare faces across multiple images for similarity (to find individuals with similar facial features) and verification (to determine that a face in one image is the same person as a face in another image)
 - Facial recognition - you can train a model with a collection of faces belonging to specific individuals, and use the model to identify those people in new images.
 
+ REST: https://learn.microsoft.com/en-us/rest/api/faceapi/face/detect-with-url?tabs=HTTP
+ 
+ 
+ ```bash
+ https://azrajcog.cognitiveservices.azure.com/face/v1.0/detect
+ 
+  {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+ 
+ Response:
+ [
+  {
+    "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
+    "recognitionModel": "recognition_01",
+    "faceRectangle": {
+      "width": 78,
+      "height": 78,
+      "left": 394,
+      "top": 54
+    },
+    "faceLandmarks": {
+      "pupilLeft": {
+        "x": 412.7,
+        "y": 78.4
+      },
+      "pupilRight": {
+        "x": 446.8,
+        "y": 74.2
+      },
+      "noseTip": {
+        "x": 437.7,
+        "y": 92.4
+      },
+      "mouthLeft": {
+        "x": 417.8,
+        "y": 114.4
+      },
+      "mouthRight": {
+        "x": 451.3,
+        "y": 109.3
+      },
+      "eyebrowLeftOuter": {
+        "x": 397.9,
+        "y": 78.5
+      },
+      "eyebrowLeftInner": {
+        "x": 425.4,
+        "y": 70.5
+      },
+      "eyeLeftOuter": {
+        "x": 406.7,
+        "y": 80.6
+      },
+      "eyeLeftTop": {
+        "x": 412.2,
+        "y": 76.2
+      },
+      "eyeLeftBottom": {
+        "x": 413,
+        "y": 80.1
+      },
+      "eyeLeftInner": {
+        "x": 418.9,
+        "y": 78
+      },
+      "eyebrowRightInner": {
+        "x": 4.8,
+        "y": 69.7
+      },
+      "eyebrowRightOuter": {
+        "x": 5.5,
+        "y": 68.5
+      },
+      "eyeRightInner": {
+        "x": 441.5,
+        "y": 75
+      },
+      "eyeRightTop": {
+        "x": 446.4,
+        "y": 71.7
+      },
+      "eyeRightBottom": {
+        "x": 447,
+        "y": 75.3
+      },
+      "eyeRightOuter": {
+        "x": 451.7,
+        "y": 73.4
+      },
+      "noseRootLeft": {
+        "x": 428,
+        "y": 77.1
+      },
+      "noseRootRight": {
+        "x": 435.8,
+        "y": 75.6
+      },
+      "noseLeftAlarTop": {
+        "x": 428.3,
+        "y": 89.7
+      },
+      "noseRightAlarTop": {
+        "x": 442.2,
+        "y": 87
+      },
+      "noseLeftAlarOutTip": {
+        "x": 424.3,
+        "y": 96.4
+      },
+      "noseRightAlarOutTip": {
+        "x": 446.6,
+        "y": 92.5
+      },
+      "upperLipTop": {
+        "x": 437.6,
+        "y": 105.9
+      },
+      "upperLipBottom": {
+        "x": 437.6,
+        "y": 108.2
+      },
+      "underLipTop": {
+        "x": 436.8,
+        "y": 111.4
+      },
+      "underLipBottom": {
+        "x": 437.3,
+        "y": 114.5
+      }
+    },
+    "faceAttributes": {
+      "age": 71,
+      "gender": "male",
+      "smile": 0.88,
+      "facialHair": {
+        "moustache": 0.8,
+        "beard": 0.1,
+        "sideburns": 0.02
+      },
+      "glasses": "sunglasses",
+      "headPose": {
+        "roll": 2.1,
+        "yaw": 3,
+        "pitch": 1.6
+      },
+      "emotion": {
+        "anger": 0.575,
+        "contempt": 0,
+        "disgust": 0.006,
+        "fear": 0.008,
+        "happiness": 0.394,
+        "neutral": 0.013,
+        "sadness": 0,
+        "surprise": 0.004
+      },
+      "hair": {
+        "bald": 0,
+        "invisible": false,
+        "hairColor": [
+          {
+            "color": "brown",
+            "confidence": 1
+          },
+          {
+            "color": "blond",
+            "confidence": 0.88
+          },
+          {
+            "color": "black",
+            "confidence": 0.48
+          },
+          {
+            "color": "other",
+            "confidence": 0.11
+          },
+          {
+            "color": "gray",
+            "confidence": 0.07
+          },
+          {
+            "color": "red",
+            "confidence": 0.03
+          }
+        ]
+      },
+      "makeup": {
+        "eyeMakeup": true,
+        "lipMakeup": false
+      },
+      "occlusion": {
+        "foreheadOccluded": false,
+        "eyeOccluded": false,
+        "mouthOccluded": false
+      },
+      "accessories": [
+        {
+          "type": "headWear",
+          "confidence": 0.99
+        },
+        {
+          "type": "glasses",
+          "confidence": 1
+        },
+        {
+          "type": "mask",
+          "confidence": 0.87
+        }
+      ],
+      "blur": {
+        "blurLevel": "Medium",
+        "value": 0.51
+      },
+      "exposure": {
+        "exposureLevel": "GoodExposure",
+        "value": 0.55
+      },
+      "noise": {
+        "noiseLevel": "Low",
+        "value": 0.12
+      }
+    }
+  }
+]
+ ```
  **------------------------------------------------------------------------------------------------------------------**
+## Extract text from images and documents
 
+
+The Computer Vision service offers two APIs that you can use to read text.
+
+**The Read API:**
+- Use this API to read small to large volumes of text from images and PDF documents.
+- This API uses a newer model than the OCR API, resulting in greater accuracy.
+- The Read API can read printed text in multiple languages, and handwritten text in English.
+- The initial function call returns an asynchronous operation ID, which must be used in a subsequent call to retrieve the results.
+
+
+**The Image Analysis API:**
+- Currently still in preview, with reading text functionality added version 4.0.
+- Use this API to read small amounts of text from images.
+- Returns contextual information, including line number and position.
+- Results are returned immediately (synchronous) from a single function call.
+- Has functionality for analyzing images past extracting text, including detecting content (such as brands, faces, and domain-specific content), describing or categorizing an image, generating thumbnails and more
+
+REST:
+https://learn.microsoft.com/en-us/rest/api/computervision/3.1/get-read-result/get-read-result?tabs=HTTP
+
+SDK: https://microsoftlearning.github.io/AI-102-AIEngineer/Instructions/20-ocr.html
+
+## Extract data from forms with Form Recognizer
+
+
+Form Recognizer is one of many Cognitive Services, cloud-based artificial intelligence (AI) services with REST APIs and client library SDKs that can be used to build intelligence into your applications.
+
+Form Recognizer uses Optical Character Recognition (OCR) capabilities and deep learning models to extract text, key-value pairs, selection marks, and tables from documents.
+
+![App Screenshot](https://learn.microsoft.com/en-us/training/wwl-data-ai/work-form-recognizer/media/how-optical-character-recognition-works.png)
+
+
+Form Recognizer service components
+Form Recognizer is composed of the following services:
+
+**Document analysis models:** which take an input of JPEG, PNG, PDF, and TIFF files and return a JSON file with the location of text in bounding boxes, text content, tables, selection marks (also known as checkboxes or radio buttons), and document structure.
+
+**Prebuilt models:** which detect and extract information from document images and return the extracted data in a structured JSON output. Form Recognizer currently supports prebuilt models for several forms, including:
+
+**W-2 forms**
+Invoices
+Receipts
+ID documents
+Business cards
+Custom models: custom models extract data from forms specific to your business. Custom models can be trained by calling the Build model API, or through Form Recognizer Studio.
+
+## Understand Form Recognizer file input requirements
+
+Form Recognizer works on input documents that meet these requirements:
+
+- Format must be JPG, PNG, BMP, PDF (text or scanned), or TIFF.
+- The file size must be less than 500 MB for paid (S0) tier and 4 MB for free (F0) tier.
+- Image dimensions must be between 50 x 50 pixels and 10000 x 10000 pixels.
+- The total size of the training data set must be 500 pages or less.
+
+## Using the REST API
+To extract form data using a custom model, use the **analyze document** REST API function with your model ID (generated during model training). This function starts the form analysis and returns a **result ID**, which you can pass in a subsequent call to the get analyze results function to retrieve the results.
+
+A successful JSON response contains readResults and documentResults nodes.
+
+The readResults node contains all of the recognized text. Text is organized by page, then by line, then by individual words.
+
+The documentResults node contains the form-specific values that the model discovered. This is where you'll find useful key/value pairs like the first name, last name, company name and more.
+
+Depending on the form analyzed, the response may also contain pageResults, which includes the tables extracted.
+https://learn.microsoft.com/en-us/rest/api/formrecognizer/2.0/get-analyze-form-result/get-analyze-form-result?tabs=HTTP
+
+```bash 
+{
+    "status": "succeeded",
+    "createdDateTime": "2021-03-29T21:12:40Z",
+    "lastUpdatedDateTime": "2021-03-29T21:12:44Z",
+    "analyzeResult": {
+        "version": "2.1.0",
+        "readResults": [
+            {
+                ...
+                "lines": [
+                    {
+                        "text": "Northwind Traders",
+                        "boundingBox": [
+                            20,
+                            17,
+                            235,
+                            17,
+                            235,
+                            44,
+                            20,
+                            44
+                        ],
+                        "words": [
+                            {
+                                "text": "Northwind",
+                                "boundingBox": [
+                                    20,
+                                    17,
+                                    140,
+                                    17,
+                                    140,
+                                    45,
+                                    20,
+                                    45
+                                ],
+                                "confidence": 0.994
+                            },
+                            {
+                                "text": "Traders",
+                                "boundingBox": [
+                                    148,
+                                    17,
+                                    234,
+                                    17,
+                                    234,
+                                    45,
+                                    147,
+                                    45
+                                ],
+                                "confidence": 0.996
+        ...,
+        "documentResults": [
+        {
+            "docType": "prebuilt:receipt",
+            "pageRange": [
+                1,
+                1
+            ],
+            "fields": {
+                "Items": {
+                    "type": "array",
+                    "valueArray": [
+                        {
+                            "type": "object",
+                            "valueObject": {
+                                "Name": {
+                                    "type": "string",
+                                    "valueString": "Apple",
+                                    "text": "Apple",
+                                    "boundingBox": [
+                                        32,
+                                        267,
+                                        92,
+                                        267,
+                                        92,
+                                        291,
+                                        32,
+                                        291
+                                    ],
+                                    "page": 1,
+                                    "confidence": 0.991,
+                                    "elements": [
+                                        "#/readResults/0/lines/4/words/1"
+                                    ]
+                                },
+    ...
+}
+```
 
 
 ######################################################################################## 
