@@ -501,6 +501,252 @@ with open(thumbnail_file_name, "wb") as thumbnail_file:
 
 print('Thumbnail saved in.', thumbnail_file_name)
 ```
+ ## REST API:
+ 
+ https://learn.microsoft.com/en-us/rest/api/computer-vision/?source=recommendations
+ 
+ https://westus.dev.cognitive.microsoft.com/docs/services/56f91f2d778daf23d8ec6739/operations/56f91f2e778daf14a499e1fa
+ 
+ **Header param:**
+ Ocp-Apim-Subscription-Key:{Key}
+ 
+ ```bash 
+ 
+ POST
+ 
+ https://azrajcog.cognitiveservices.azure.com/vision/v1.0/analyze?visualFeatures=Categories,Tags,Description,Faces,ImageType,Color,Adult
+ 
+ Request:
+ {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+ 
+ Response:
+ {
+    "categories": [
+        {
+            "name": "people_",
+            "score": 0.58203125
+        }
+    ],
+    "adult": {
+        "isAdultContent": false,
+        "isRacyContent": false,
+        "adultScore": 0.007187211886048317,
+        "racyScore": 0.021118562668561935
+    },
+    "color": {
+        "dominantColorForeground": "White",
+        "dominantColorBackground": "Orange",
+        "dominantColors": [
+            "Orange",
+            "White"
+        ],
+        "accentColor": "C1940A",
+        "isBwImg": false,
+        "isBWImg": false
+    },
+    "imageType": {
+        "clipArtType": 0,
+        "lineDrawingType": 0
+    },
+    "tags": [
+        {
+            "name": "person",
+            "confidence": 0.9967427253723145
+        },
+        {
+            "name": "human face",
+            "confidence": 0.9841591119766235
+        },
+        {
+            "name": "smile",
+            "confidence": 0.817595899105072
+        },
+        {
+            "name": "man",
+            "confidence": 0.7422456741333008
+        },
+        {
+            "name": "clothing",
+            "confidence": 0.7328047752380371
+        },
+        {
+            "name": "portrait",
+            "confidence": 0.5366792678833008
+        }
+    ],
+    "description": {
+        "tags": [
+            "person",
+            "man",
+            "table",
+            "standing",
+            "woman",
+            "food",
+            "water",
+            "wearing",
+            "shirt",
+            "holding",
+            "glasses",
+            "phone",
+            "young",
+            "people"
+        ],
+        "captions": [
+            {
+                "text": "a person posing for the camera",
+                "confidence": 0.9687843244692304
+            }
+        ]
+    },
+    "faces": [
+        {
+            "faceRectangle": {
+                "left": 302,
+                "top": 193,
+                "width": 221,
+                "height": 221
+            }
+        }
+    ],
+    "requestId": "2a46cfbd-d1e6-49a0-b922-54111d2b931f",
+    "metadata": {
+        "height": 768,
+        "width": 1024,
+        "format": "Jpeg"
+    }
+}
+ 
+ ```
+ ## Describe
+ ```bash 
+ POST
+ https://azrajcog.cognitiveservices.azure.com/vision/v1.0/describe
+ 
+ Request:
+ {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+
+ 
+ Response:
+ {
+    "description": {
+        "tags": [
+            "person",
+            "man",
+            "table",
+            "standing",
+            "woman",
+            "food",
+            "water",
+            "wearing",
+            "shirt",
+            "holding",
+            "glasses",
+            "phone",
+            "young",
+            "people"
+        ],
+        "captions": [
+            {
+                "text": "a person posing for the camera",
+                "confidence": 0.9687843161121992
+            }
+        ]
+    },
+    "requestId": "ce84ef1a-9cbb-44f7-b49c-9476d67922c8",
+    "metadata": {
+        "height": 768,
+        "width": 1024,
+        "format": "Jpeg"
+    }
+}
+ 
+ ```
+ ## Thumbnail
+ 
+ ``` bash
+ POST
+ https://azrajcog.cognitiveservices.azure.com/vision/v1.0/generateThumbnail?width=50&height=50&smartCropping=true
+ 
+ {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+
+ 
+ ```
+ 
+ ## Object Detection
+ 
+ ``` bash
+ POST
+ https://azrajcog.cognitiveservices.azure.com/vision/v3.1/detect
+ 
+ {"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+
+ Response:
+ {
+    "objects": [
+        {
+            "rectangle": {
+                "x": 108,
+                "y": 25,
+                "w": 798,
+                "h": 743
+            },
+            "object": "person",
+            "confidence": 0.782
+        }
+    ],
+    "requestId": "bf88cbd6-2273-4bc0-8e17-063b650c4d3a",
+    "metadata": {
+        "height": 768,
+        "width": 1024,
+        "format": "Jpeg"
+    }
+}
+ ```
+ ## Tag
+ 
+ ``` bash
+ POST
+https://azrajcog.cognitiveservices.azure.com/vision/v1.0/tag
+ 
+{"url":"https://wallpapercave.com/wp/wp9801001.jpg"}
+
+ Response:
+ {
+    "tags": [
+        {
+            "name": "person",
+            "confidence": 0.9967427253723145
+        },
+        {
+            "name": "human face",
+            "confidence": 0.9841591119766235
+        },
+        {
+            "name": "smile",
+            "confidence": 0.817595899105072
+        },
+        {
+            "name": "man",
+            "confidence": 0.7422456741333008
+        },
+        {
+            "name": "clothing",
+            "confidence": 0.7328047752380371
+        },
+        {
+            "name": "portrait",
+            "confidence": 0.5366792678833008
+        }
+    ],
+    "requestId": "36f0b603-c966-48cb-bed8-1f752ff06b5d",
+    "metadata": {
+        "height": 768,
+        "width": 1024,
+        "format": "Jpeg"
+    }
+}
+ ```
+ 
  **------------------------------------------------------------------------------------------------------------------**
 
 ## Analyze video
