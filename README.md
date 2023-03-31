@@ -1723,6 +1723,77 @@ RESPONSE:
 ```
  
  
+
+## Translate text with the Translator service
+
+The Translator Azure Cognitive Service provides an API for translating text between 90 supported languages.
+
+
+The Translator service provides a multilingual text translation API that you can use for:
+
+- Language detection
+- One-to-many translation
+- Script transliteration (converting text from its native script to an alternative script)
+
+## Translation
+To translate text from one language to another, use the translate function; specifying a single from parameter to indicate the source language, and one or more to parameters to specify the languages into which you want the text translated.
+
+REST:
+``` bash
+POST
+https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=ta
+
+HEADERS:
+Content-Type:application/json
+Ocp-Apim-Subscription-Key:448bfc9f5e7c4d5a83ca73bf4074313a
+Ocp-Apim-Subscription-Region:eastus
+REQUEST BODY:
+[
+  {
+    "Text": "I would really like to speak to you."
+  }
+]
+RESPONSE:
+[
+    {
+        "translations": [
+            {
+                "text": "நான் உங்களுடன் பேச விரும்புகிறேன்.",
+                "to": "ta"
+            }
+        ]
+    }
+]
+```
+
+## Transliteration
+Our Japanese text is written using Hiragana script, so rather than translate it to a different language, you may want to transliterate it to a different script - for example to render the text in Latin script (as used by English language text).
+
+REST:
+``` bash
+POST
+https://api.cognitive.microsofttranslator.com/transliterate?api-version=3.0&language=ja&fromScript=jpan&toScript=latn
+
+HEADERS:
+Content-Type:application/json
+Ocp-Apim-Subscription-Key:448bfc9f5e7c4d5a83ca73bf4074313a
+Ocp-Apim-Subscription-Region:eastus
+REQUEST BODY:
+[
+    {
+        "script": "Latn",
+        "text": "Kon'nichiwa"
+    }
+]
+RESPONSE:
+[
+    {
+        "text": "kon'nichiwa",
+        "script": "latn"
+    }
+]
+```
+ 
  
   **------------------------------------------------------------------------------------------------------------------**
 
