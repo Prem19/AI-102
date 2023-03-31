@@ -1245,6 +1245,484 @@ https://learn.microsoft.com/en-us/rest/api/formrecognizer/2.0/get-analyze-form-r
  https://learn.microsoft.com/en-us/training/paths/process-translate-text-azure-cognitive-services/ 
  
  
+ ## Extract insights from text with the Language service
+
+
+The Language service is designed to help you extract information from text. It provides functionality that you can use for:
+
+- Language detection - determining the language in which text is written.
+- Key phrase extraction - identifying important words and phrases in the text that indicate the main points.
+- Sentiment analysis - quantifying how positive or negative the text is.
+- Named entity recognition - detecting references to entities, including people, locations, time periods, organizations, and more.
+- Entity linking - identifying specific entities by providing reference links to Wikipedia articles.
+
+## Detect language
+
+The Language Detection API evaluates text input and, for each document submitted, returns language identifiers with a score indicating the strength of the analysis. The Language service recognizes up to 120 languages.
+
+Language detection can work with documents or single phrases. It's important to note that the document size must be under 5,120 characters. The size limit is per document and each collection is restricted to 1,000 items (IDs).
+
+```bash
+POST 
+https://azrajcog.cognitiveservices.azure.com/text/analytics/v3.1/languages 
+
+REQUEST BODY:
+
+{
+  "documents": [
+    {
+      "countryHint": "US",
+      "id": "1",
+      "text": "Hello world"
+    },
+    {
+      "id": "2",
+      "text": "Bonjour tout le monde"
+    },
+    {
+      "id": "3",
+      "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+    }
+  ]
+}
+
+
+RESPONSE:
+{
+    "documents": [
+        {
+            "id": "1",
+            "detectedLanguage": {
+                "name": "English",
+                "iso6391Name": "en",
+                "confidenceScore": 0.98
+            },
+            "warnings": []
+        },
+        {
+            "id": "2",
+            "detectedLanguage": {
+                "name": "French",
+                "iso6391Name": "fr",
+                "confidenceScore": 1
+            },
+            "warnings": []
+        },
+        {
+            "id": "3",
+            "detectedLanguage": {
+                "name": "Spanish",
+                "iso6391Name": "es",
+                "confidenceScore": 1
+            },
+            "warnings": []
+        }
+    ],
+    "errors": [],
+    "modelVersion": "2022-10-01"
+}
+```
+
+## Extract key phrases
+
+Key phrase extraction is the process of evaluating the text of a document, or documents, and then identifying the main points around the context of the document(s).
+
+Key phrase extraction works best for larger documents (the maximum size that can be analyzed is 5,120 characters).
+
+
+```bash
+POST https://azrajcog.cognitiveservices.azure.com/text/analytics/v3.1/keyPhrases
+
+REQUEST BODY:
+{
+  "documents": [
+    {
+      "id": "1",
+      "language": "en",
+      "text": "You must be the change you wish to see in the world."
+    },
+    {
+      "id": "2",
+      "language": "en",
+      "text": "The journey of a thousand miles  begins with a single step."
+    }
+  ]
+}
+
+RESPONSE:
+{
+    "documents": [
+        {
+            "id": "1",
+            "keyPhrases": [
+                "change",
+                "world"
+            ],
+            "warnings": []
+        },
+        {
+            "id": "2",
+            "keyPhrases": [
+                "thousand miles",
+                "single step",
+                "journey"
+            ],
+            "warnings": []
+        }
+    ],
+    "errors": [],
+    "modelVersion": "2022-10-01"
+}
+```
+## Analyze sentiment
+
+Sentiment analysis is used to evaluate how positive or negative a text document is, which can be useful in various workloads, such as:
+
+Evaluating a movie, book, or product by quantifying sentiment based on reviews.
+Prioritizing customer service responses to correspondence received through email or social media messaging.
+When using the Language service to evaluate sentiment, the response includes overall document sentiment and individual sentence sentiment for each document submitted to the service.
+
+```bash
+POST  https://azrajcog.cognitiveservices.azure.com/text/analytics/v3.1/sentiment
+
+
+REQUEST BODY:
+{
+  "documents": [
+    {
+      "language": "en",
+      "id": "1",
+      "text": "Hello world. This is some input text that I love."
+    },
+    {
+      "language": "en",
+      "id": "2",
+      "text": "It's incredibly sunny outside! I'm so happy."
+    },
+    {
+      "language": "en",
+      "id": "3",
+      "text": "Pike place market is my favorite Seattle attraction."
+    }
+  ]
+}
+
+RESPONSE:
+{
+    "documents": [
+        {
+            "id": "1",
+            "sentiment": "positive",
+            "confidenceScores": {
+                "positive": 0.99,
+                "neutral": 0.01,
+                "negative": 0
+            },
+            "sentences": [
+                {
+                    "sentiment": "neutral",
+                    "confidenceScores": {
+                        "positive": 0.26,
+                        "neutral": 0.73,
+                        "negative": 0.01
+                    },
+                    "offset": 0,
+                    "length": 13,
+                    "text": "Hello world. "
+                },
+                {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                        "positive": 0.99,
+                        "neutral": 0.01,
+                        "negative": 0
+                    },
+                    "offset": 13,
+                    "length": 36,
+                    "text": "This is some input text that I love."
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "2",
+            "sentiment": "positive",
+            "confidenceScores": {
+                "positive": 0.99,
+                "neutral": 0.01,
+                "negative": 0
+            },
+            "sentences": [
+                {
+                    "sentiment": "neutral",
+                    "confidenceScores": {
+                        "positive": 0.26,
+                        "neutral": 0.72,
+                        "negative": 0.02
+                    },
+                    "offset": 0,
+                    "length": 31,
+                    "text": "It's incredibly sunny outside! "
+                },
+                {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                        "positive": 0.99,
+                        "neutral": 0.01,
+                        "negative": 0
+                    },
+                    "offset": 31,
+                    "length": 13,
+                    "text": "I'm so happy."
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "3",
+            "sentiment": "positive",
+            "confidenceScores": {
+                "positive": 0.99,
+                "neutral": 0.01,
+                "negative": 0
+            },
+            "sentences": [
+                {
+                    "sentiment": "positive",
+                    "confidenceScores": {
+                        "positive": 0.99,
+                        "neutral": 0.01,
+                        "negative": 0
+                    },
+                    "offset": 0,
+                    "length": 52,
+                    "text": "Pike place market is my favorite Seattle attraction."
+                }
+            ],
+            "warnings": []
+        }
+    ],
+    "errors": [],
+    "modelVersion": "2022-11-01"
+}
+```
+## Extract entities
+
+Named Entity Recognition identifies entities that are mentioned in the text. Entities are grouped into categories and subcategories, for example:
+
+- Person
+- Location
+- DateTime
+- Organization
+- Address
+- Email
+- URL
+```bash
+POST 
+https://azrajcog.cognitiveservices.azure.com/text/analytics/v3.1/entities/recognition/general
+
+REQUEST BODY:
+
+{
+  "documents": [
+    {
+      "language": "en",
+      "id": "1",
+      "text": "I had a wonderful trip to Seattle last week."
+    },
+    {
+      "language": "en",
+      "id": "2",
+      "text": "I work at Microsoft."
+    },
+    {
+      "language": "en",
+      "id": "3",
+      "text": "I visited Space Needle 2 times."
+    }
+  ]
+}
+
+RESPONSE:
+{
+    "documents": [
+        {
+            "id": "1",
+            "entities": [
+                {
+                    "text": "trip",
+                    "category": "Event",
+                    "offset": 18,
+                    "length": 4,
+                    "confidenceScore": 0.74
+                },
+                {
+                    "text": "Seattle",
+                    "category": "Location",
+                    "subcategory": "GPE",
+                    "offset": 26,
+                    "length": 7,
+                    "confidenceScore": 1
+                },
+                {
+                    "text": "last week",
+                    "category": "DateTime",
+                    "subcategory": "DateRange",
+                    "offset": 34,
+                    "length": 9,
+                    "confidenceScore": 0.8
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "2",
+            "entities": [
+                {
+                    "text": "Microsoft",
+                    "category": "Organization",
+                    "offset": 10,
+                    "length": 9,
+                    "confidenceScore": 0.99
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "3",
+            "entities": [
+                {
+                    "text": "Space Needle",
+                    "category": "Location",
+                    "offset": 10,
+                    "length": 12,
+                    "confidenceScore": 0.96
+                },
+                {
+                    "text": "2",
+                    "category": "Quantity",
+                    "subcategory": "Number",
+                    "offset": 23,
+                    "length": 1,
+                    "confidenceScore": 0.8
+                }
+            ],
+            "warnings": []
+        }
+    ],
+    "errors": [],
+    "modelVersion": "2021-06-01"
+}
+```
+
+## Extract linked entities
+
+In some cases, the same name might be applicable to more than one entity. For example, does an instance of the word "Venus" refer to the planet or the goddess from mythology?
+
+Entity linking can be used to disambiguate entities of the same name by referencing an article in a knowledge base. Wikipedia provides the knowledge base for the Text Analytics service. Specific article links are determined based on entity context within the text.
+
+
+```bash
+POST 
+https://azrajcog.cognitiveservices.azure.com/text/analytics/v3.1/entities/linking
+REQUEST BODY:
+
+{
+  "documents": [
+    {
+      "language": "en",
+      "id": "1",
+      "text": "I had a wonderful trip to Seattle last week."
+    },
+    {
+      "language": "en",
+      "id": "2",
+      "text": "I work at Microsoft."
+    },
+    {
+      "language": "en",
+      "id": "3",
+      "text": "I visited Space Needle 2 times."
+    }
+  ]
+}
+
+RESPONSE:
+{
+    "documents": [
+        {
+            "id": "1",
+            "entities": [
+                {
+                    "bingId": "5fbba6b8-85e1-4d41-9444-d9055436e473",
+                    "name": "Seattle",
+                    "matches": [
+                        {
+                            "text": "Seattle",
+                            "offset": 26,
+                            "length": 7,
+                            "confidenceScore": 0.19
+                        }
+                    ],
+                    "language": "en",
+                    "id": "Seattle",
+                    "url": "https://en.wikipedia.org/wiki/Seattle",
+                    "dataSource": "Wikipedia"
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "2",
+            "entities": [
+                {
+                    "bingId": "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85",
+                    "name": "Microsoft",
+                    "matches": [
+                        {
+                            "text": "Microsoft",
+                            "offset": 10,
+                            "length": 9,
+                            "confidenceScore": 0.25
+                        }
+                    ],
+                    "language": "en",
+                    "id": "Microsoft",
+                    "url": "https://en.wikipedia.org/wiki/Microsoft",
+                    "dataSource": "Wikipedia"
+                }
+            ],
+            "warnings": []
+        },
+        {
+            "id": "3",
+            "entities": [
+                {
+                    "bingId": "f8dd5b08-206d-2554-6e4a-893f51f4de7e",
+                    "name": "Space Needle",
+                    "matches": [
+                        {
+                            "text": "Space Needle",
+                            "offset": 10,
+                            "length": 12,
+                            "confidenceScore": 0.17
+                        }
+                    ],
+                    "language": "en",
+                    "id": "Space Needle",
+                    "url": "https://en.wikipedia.org/wiki/Space_Needle",
+                    "dataSource": "Wikipedia"
+                }
+            ],
+            "warnings": []
+        }
+    ],
+    "errors": [],
+    "modelVersion": "2021-06-01"
+}
+```
+ 
+ 
  
   **------------------------------------------------------------------------------------------------------------------**
 
