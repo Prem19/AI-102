@@ -1244,9 +1244,80 @@ https://learn.microsoft.com/en-us/rest/api/formrecognizer/2.0/get-analyze-form-r
  
  https://learn.microsoft.com/en-us/training/paths/process-translate-text-azure-cognitive-services/ 
  
+## Analyze text
+-> Retrieve and process key phrases
+
+-> Retrieve and process entities
+
+-> Retrieve and process sentiment
+
+-> Detect the language used in text
+
+-> Detect personally identifiable information (PII)
+
+ ## Process speech
+-> Implement and customize text-to-speech
+
+-> Implement and customize speech-to-text
+
+-> Improve text-to-speech by using SSML and Custom Neural Voice
+
+-> Improve speech-to-text by using phrase lists and Custom Speech
+
+-> Implement intent recognition
+
+-> Implement keyword recognition
+
+ ## Translate language
+-> Translate text and documents by using the Translator service
+
+-> Implement custom translation, including training, improving, and publishing a custom model
+
+-> Translate speech-to-speech by using the Speech service
+
+-> Translate speech-to-text by using the Speech service
+
+-> Translate to multiple languages simultaneously
+
+ ## Build and manage a language understanding model
+-> Create intents and add utterances
+
+-> Create entities
+
+-> Train evaluate, deploy, and test a language understanding model
+
+-> Optimize a Language Understanding (LUIS) model
+
+-> Integrate multiple language service models by using Orchestrator
+
+-> Import and export language understanding models
+
+ ## Create a question answering solution
+-> Create a question answering project
+
+-> Add question-and-answer pairs manually
+
+-> Import sources
+
+-> Train and test a knowledge base
+
+-> Publish a knowledge base
+
+-> Create a multi-turn conversation
+
+-> Add alternate phrasing
+
+-> Add chit-chat to a knowledge base
+
+-> Export a knowledge base
+
+-> Create a multi-language question answering solution
+
+-> Create a multi-domain question answering solution
+
+-> Use metadata for question-and-answer pairs
  
  ## Extract insights from text with the Language service
-
 
 The Language service is designed to help you extract information from text. It provides functionality that you can use for:
 
