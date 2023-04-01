@@ -30,9 +30,9 @@ https://learn.microsoft.com/en-us/training/paths/prepare-for-ai-engineering/    
 
 -> Configure diagnostic logging
 
-Manage costs for Azure AI services
+-> Manage costs for Azure AI services
 
-Monitor an Azure AI resource
+-> Monitor an Azure AI resource
 
 ## Deploy Azure AI services
 -> Determine a default endpoint for a service
