@@ -1,5 +1,7 @@
 # AI-102 - Study Guide
 
+Python - https://learn.microsoft.com/en-us/python/api/overview/azure/cognitive-services?view=azure-python&viewFallbackFrom=azure-python%20Next%20Question
+
 
 # 1. Plan and manage an Azure AI solution 	(25–30%)	
 
